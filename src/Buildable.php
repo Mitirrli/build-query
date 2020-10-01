@@ -108,12 +108,12 @@ trait Buildable
      */
     public function betweenKey(string $key, array $value = ['start' => 0, 'end' => 100])
     {
-        $this->init[$key] = ['<=', $this->params[$value['end'] ?? 0] ?? 0];
-
-        if (array_key_exists('start', $value) && array_key_exists('end', $value)) {
+        if (array_key_exists('start', $value) && array_key_exists('end', $value) && isset($this->params[$value['end']]) && isset($this->params[$value['start']])) {
             $this->init[$key] = ['BETWEEN', [$this->params[$value['start']], $this->params[$value['end']]]];
-        } elseif (array_key_exists('start', $value)) {
+        } elseif (array_key_exists('start', $value) && isset($this->params[$value['start']])) {
             $this->init[$key] = ['>=', $this->params[$value['start']]];
+        } elseif (array_key_exists('end', $value) && isset($this->params[$value['end']])) {
+            $this->init[$key] = ['<=', $this->params[$value['end'] ?? 0] ?? 0];
         }
 
         return $this;
