@@ -4,6 +4,7 @@ namespace Mitirrli\Buildable\Tests;
 
 use Mitirrli\Buildable\Buildable;
 use Mitirrli\Buildable\Constant;
+use Mitirrli\Buildable\Query\SearchParam;
 use Mitirrli\Buildable\Tests\Constant\TestData;
 use PHPUnit\Framework\TestCase;
 
@@ -60,7 +61,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$key]);
         self::assertEquals($test2[0], 'LIKE');
-        self::assertEquals($test2[1], TestData::TEST_DATA2[$key].'%');
+        self::assertEquals($test2[1], TestData::TEST_DATA2[$key] . '%');
 
         //Test 3. all fuzzy search
         $key = 'test';
@@ -71,7 +72,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$key]);
         self::assertEquals($test2[0], 'LIKE');
-        self::assertEquals($test2[1], '%'.TestData::TEST_DATA2[$key].'%');
+        self::assertEquals($test2[1], '%' . TestData::TEST_DATA2[$key] . '%');
 
         $key = 'test';
         $new_key = 'new key';
@@ -100,7 +101,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$new_key]);
         self::assertEquals($test2[0], 'LIKE');
-        self::assertEquals($test2[1], TestData::TEST_DATA3[$key].'%');
+        self::assertEquals($test2[1], TestData::TEST_DATA3[$key] . '%');
 
         //Test 2. right fuzzy search
         $key = 'C';
@@ -112,7 +113,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$new_key]);
         self::assertEquals($test2[0], 'LIKE');
-        self::assertEquals($test2[1], '%'.TestData::TEST_DATA3[$key].'%');
+        self::assertEquals($test2[1], '%' . TestData::TEST_DATA3[$key] . '%');
     }
 
     /**
@@ -227,6 +228,18 @@ class QueryTest extends TestCase
         self::assertArrayNotHasKey('a', $test2);
         self::assertArrayNotHasKey('b', $test2);
         self::assertArrayHasKey('d', $test2);
+    }
+
+    /**
+     * test static func get fuzzy param.
+     */
+    public function testGetFuzzyParam()
+    {
+        $key = 'a';
+
+        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::ALL), '%' . $key . '%');
+        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::LEFT), '%' . $key);
+        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::RIGHT), $key . '%');
     }
 
     /**
