@@ -45,12 +45,12 @@ trait Buildable
     /**
      * assign the value.
      *
-     * @param array|string $key   can be array or string
-     * @param int          $fuzzy fuzzy search
-     *
-     * @throws Exception\NotExistException
+     * @param array|string $key can be array or string
+     * @param int $fuzzy fuzzy search
      *
      * @return $this
+     *
+     * @throws Exception\NotExistException
      *
      * @example
      * <pre>
@@ -95,8 +95,8 @@ trait Buildable
     /**
      * Between two keys.
      *
-     * @param string $key   name of key
-     * @param array  $value array of value
+     * @param string $key name of key
+     * @param array $value array of value
      *
      * @return $this
      *
@@ -106,7 +106,7 @@ trait Buildable
      */
     public function betweenKey(string $key, array $value = ['start' => 0, 'end' => 100])
     {
-        $this->init[$key] = ['<=', $this->params[$value['end']]];
+        $this->init[$key] = ['<=', $this->params[$value['end'] ?? 0] ?? 0];
 
         if (array_key_exists('start', $value) && array_key_exists('end', $value)) {
             $this->init[$key] = ['BETWEEN', [$this->params[$value['start']], $this->params[$value['end']]]];
@@ -120,7 +120,7 @@ trait Buildable
     /**
      * before one key.
      *
-     * @param string      $key  name of key
+     * @param string $key name of key
      * @param string|null $name final name of the key
      *
      * @return $this
@@ -137,7 +137,7 @@ trait Buildable
     /**
      * after one key.
      *
-     * @param string      $key  name of key
+     * @param string $key name of key
      * @param string|null $name final name of the key
      *
      * @return $this
