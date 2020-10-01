@@ -18,12 +18,14 @@
 
 ## Installation
 
-```text
-composer require "mitirrli/build-query" --no-dev
+```shell script
+  $ composer require "mitirrli/build-query" --no-dev
 ```
 
 ## QuickStart
-```
+```php
+use Mitirrli\Buildable\Constant;
+
 $this->param($params ?? [])
     ->initial(['initial' => 0])
     ->key('avatar')
