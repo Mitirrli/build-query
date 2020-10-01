@@ -18,24 +18,28 @@
 
 ## Installation
 
-```
+```shell script
 $ composer require "mitirrli/build-query" --no-dev
 ```
 
 ## QuickStart
-```
+```php
 use Mitirrli\Buildable\Constant;
 
-$this->param($params ?? [])
-     ->initial(['initial' => 0])
-     ->key('avatar')
-     ->key(['name', 'nickname'])
-     ->key('name', Constant::RIGHT)
-     ->key('name', Constant::ALL)
-     ->inKey('type')
-     ->betweenKey('created_at', ['start' => 'create', 'end' => 'end'])
-     ->beforeKey('id')
-     ->afterKey('id')
-     ->unsetKey('initial')
-     ->result();
+class Test {
+    function test() {
+        $this->param($params ?? [])
+        ->initial(['initial' => 0])
+        ->key('avatar')
+        ->key(['name', 'nickname'])
+        ->key('name', Constant::RIGHT)
+        ->key('name', Constant::ALL)
+        ->inKey('type')
+        ->betweenKey('created_at', ['start' => 'create', 'end' => 'end'])
+        ->beforeKey('id')
+        ->afterKey('id')
+        ->unsetKey('initial')
+        ->result();
+    }
+}
 ```  
