@@ -4,7 +4,20 @@
         xsi:noNamespaceSchemaLocation="phpunit.xsd"
         bootstrap="vendor/autoload.php"
         colors="true"
-        verbose="true">
+        verbose="true"
+        stopOnFailure="true"
+>
+    <testsuites>
+        <testsuite name="default">
+            <directory suffix="Test.php">tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="false">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
 
     <logging>
         <log type="coverage-clover" target="build/logs/clover.xml"/>

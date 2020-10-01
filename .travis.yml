@@ -11,7 +11,7 @@ sudo: false
 
 install: travis_retry composer install --no-interaction --prefer-source --dev
 
-script: vendor/bin/phpunit tests --coverage-clover build/logs/clover.xml
+script: vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls
