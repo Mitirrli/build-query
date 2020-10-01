@@ -5,7 +5,6 @@ namespace Mitirrli\Buildable\Tests;
 use Mitirrli\Buildable\Buildable;
 use Mitirrli\Buildable\Constant;
 use Mitirrli\Buildable\Exception\NotExistException;
-use Mitirrli\Buildable\Query\SearchTrait;
 use Mitirrli\Buildable\Tests\Constant\TestData;
 use PHPUnit\Framework\TestCase;
 
