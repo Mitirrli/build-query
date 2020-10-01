@@ -45,12 +45,12 @@ trait Buildable
     /**
      * assign the value.
      *
-     * @param array|string $key   can be array or string
-     * @param int          $fuzzy fuzzy search
-     *
-     * @throws Exception\NotExistException
+     * @param array|string $key can be array or string
+     * @param int $fuzzy fuzzy search
      *
      * @return $this
+     *
+     * @throws Exception\NotExistException
      *
      * @example
      * <pre>
@@ -65,10 +65,12 @@ trait Buildable
         $name = is_array($key) ? $key[1] : $key;
         $key = is_array($key) ? $key[0] : $key;
 
-        $this->init[$name]
-            = $fuzzy ?
-            ['LIKE', $this->getFuzzyParam($this->params[$key], $fuzzy)]
-            : $this->params[$key];
+        if (isset($this->params[$key]) && !empty($this->params[$key])) {
+            $this->init[$name]
+                = $fuzzy ?
+                ['LIKE', $this->getFuzzyParam($this->params[$key], $fuzzy)]
+                : $this->params[$key];
+        }
 
         return $this;
     }
@@ -95,8 +97,8 @@ trait Buildable
     /**
      * Between two keys.
      *
-     * @param string $key   name of key
-     * @param array  $value array of value
+     * @param string $key name of key
+     * @param array $value array of value
      *
      * @return $this
      *
@@ -120,7 +122,7 @@ trait Buildable
     /**
      * before one key.
      *
-     * @param string      $key  name of key
+     * @param string $key name of key
      * @param string|null $name final name of the key
      *
      * @return $this
@@ -137,7 +139,7 @@ trait Buildable
     /**
      * after one key.
      *
-     * @param string      $key  name of key
+     * @param string $key name of key
      * @param string|null $name final name of the key
      *
      * @return $this
