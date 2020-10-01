@@ -9,6 +9,13 @@ php:
 dist: trusty
 sudo: false
 
-install: travis_retry composer install --no-interaction --prefer-source
+install: travis_retry composer install --no-interaction --prefer-source --no-dev
 
 script: vendor/bin/phpunit tests
+
+after_script:
+  - |
+    if [[ $MORE != "" ]]; then
+      wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar;
+      php php-coveralls.phar -v;
+    fi
