@@ -58,10 +58,13 @@ trait Buildable
      */
     public function key($key, int $fuzzy = Constant::NONE)
     {
-        $this->init[$key[1] ?? $key]
+        $name = is_array($key) ? $key[1] : $key;
+        $key = is_array($key) ? $key[0] : $key;
+
+        $this->init[$name]
             = $fuzzy ?
-            ['LIKE', SearchParam::getParam($this->params[$key[0] ?? $key], $fuzzy)]
-            : $this->params[$key[0] ?? $key];
+            ['LIKE', SearchParam::getParam($this->params[$key], $fuzzy)]
+            : $this->params[$key];
 
         return $this;
     }
