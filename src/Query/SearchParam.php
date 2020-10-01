@@ -16,7 +16,7 @@ final class SearchParam
      *
      * @return string
      */
-    public static function getParam(string $key, int $fuzzy): string
+    public static function getFuzzyParam(string $key, int $fuzzy): string
     {
         switch ($fuzzy) {
             case Constant::RIGHT:
@@ -25,7 +25,7 @@ final class SearchParam
             case Constant::LEFT:
                 return '%'.$key;
 
-            default:
+            case Constant::ALL:
                 return '%'.$key.'%';
         }
     }

@@ -63,7 +63,7 @@ trait Buildable
 
         $this->init[$name]
             = $fuzzy ?
-            ['LIKE', SearchParam::getParam($this->params[$key], $fuzzy)]
+            ['LIKE', SearchParam::getFuzzyParam($this->params[$key], $fuzzy)]
             : $this->params[$key];
 
         return $this;
