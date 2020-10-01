@@ -4,40 +4,12 @@ namespace Mitirrli\Buildable\Tests;
 
 use Mitirrli\Buildable\Buildable;
 use Mitirrli\Buildable\Constant;
-use Mitirrli\Buildable\Exception\NotExistException;
 use Mitirrli\Buildable\Tests\Constant\TestData;
 use PHPUnit\Framework\TestCase;
 
 class QueryTest extends TestCase
 {
     use Buildable;
-
-    /**
-     * test function initial.
-     */
-    public function testInitial()
-    {
-        array_map(function ($value) {
-            $object = $this->initial($value);
-
-            self::assertEquals($object->result(), $value);
-        }, TestData::TEST_DATA1);
-    }
-
-    /**
-     * test function param.
-     */
-    public function testParam()
-    {
-        array_map(function ($value) {
-            $object = $this->param($value);
-
-            $property = new \ReflectionProperty($object, 'params');
-            $property->setAccessible(true);
-
-            self::assertEquals($value, $property->getValue($object));
-        }, TestData::TEST_DATA1);
-    }
 
     /**
      * test function key.
@@ -228,46 +200,5 @@ class QueryTest extends TestCase
         self::assertArrayNotHasKey('a', $test2);
         self::assertArrayNotHasKey('b', $test2);
         self::assertArrayHasKey('d', $test2);
-    }
-
-    /**
-     * test static func get fuzzy param.
-     */
-    public function testGetFuzzyParam()
-    {
-        $key = 'a';
-
-        self::assertEquals($this->getFuzzyParam($key, Constant::ALL), '%'.$key.'%');
-        self::assertEquals($this->getFuzzyParam($key, Constant::LEFT), '%'.$key);
-        self::assertEquals($this->getFuzzyParam($key, Constant::RIGHT), $key.'%');
-    }
-
-    /**
-     * test NotExistException.
-     *
-     * @throws NotExistException
-     */
-    public function testNotExistException()
-    {
-        //Test 4. test exception
-        $this->expectException(NotExistException::class);
-        $this->expectExceptionMessage('This value is not exist.');
-        $this->expectExceptionCode(1);
-
-        //Test 5. key not exist
-        $key = 'test';
-        $this->initial([])->param(TestData::TEST_DATA2)->key($key, 4)->result();
-    }
-
-    /**
-     * test function result.
-     */
-    public function testResult()
-    {
-        $keys = array_keys(TestData::TEST_DATA2);
-
-        array_map(function ($value) {
-            self::assertArrayHasKey($value, $this->param(TestData::TEST_DATA2)->key($value)->result());
-        }, $keys);
     }
 }
