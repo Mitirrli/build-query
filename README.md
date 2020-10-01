@@ -19,7 +19,7 @@
 ## Installation
 
 ```shell
-$ composer require "mitirrli/build-query"
+$ composer require "mitirrli/build-query" --no-dev
 ```
 
 ## QuickStart
@@ -27,16 +27,16 @@ $ composer require "mitirrli/build-query"
 use Mitirrli\Buildable\Constant;
 
 $this->param($params ?? [])
-     ->initial(['initial' => 0]) //set an initial value
-     ->key('name', Constant::RIGHT) //right fuzzy
-     ->key('name', Constant::ALL) //all fuzzy
+     ->initial(['initial' => 0])
      ->key('avatar')
      ->key(['name', 'nickname'])
-     ->inKey('type') //array search
-     ->betweenKey('created_at', ['start' => 'create', 'end' => 'end']) //between search
-     ->beforeKey('id') //before Key
-     ->afterKey('id') //after kay
-     ->unsetKey('initial') //unset param
-     ->result(); //get result
+     ->key('name', Constant::RIGHT)
+     ->key('name', Constant::ALL)
+     ->inKey('type')
+     ->betweenKey('created_at', ['start' => 'create', 'end' => 'end'])
+     ->beforeKey('id')
+     ->afterKey('id')
+     ->unsetKey('initial')
+     ->result();
 ```  
   
