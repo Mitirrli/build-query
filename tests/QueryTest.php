@@ -75,23 +75,6 @@ class QueryTest extends TestCase
         self::assertEquals($test2[0], 'LIKE');
         self::assertEquals($test2[1], '%' . TestData::TEST_DATA2[$key] . '%');
 
-        //Test 4. test exception
-        $this->expectException(NotExistException::class);
-        $this->expectExceptionMessage('This value is not exist.');
-        $this->expectExceptionCode(1);
-
-        throw new NotExistException('This value is not exist.', 1);
-
-        //Test 5. key not exist
-        try {
-            $key = 'test';
-
-            $object = $this->initial([])->param(TestData::TEST_DATA2)->key($key, 4);
-        } catch (NotExistException $e) {
-            self::assertEquals($e->getMessage(), 'This value is not exist.');
-            self::assertEquals($e->getCode(), 1);
-        }
-
         $key = 'test';
         $new_key = 'new key';
 
@@ -258,6 +241,22 @@ class QueryTest extends TestCase
         self::assertEquals(SearchParam::getFuzzyParam($key, Constant::ALL), '%' . $key . '%');
         self::assertEquals(SearchParam::getFuzzyParam($key, Constant::LEFT), '%' . $key);
         self::assertEquals(SearchParam::getFuzzyParam($key, Constant::RIGHT), $key . '%');
+    }
+
+    /**
+     * test NotExistException.
+     * @throws NotExistException
+     */
+    public function testNotExistException()
+    {
+        //Test 4. test exception
+        $this->expectException(NotExistException::class);
+        $this->expectExceptionMessage('This value is not exist.');
+        $this->expectExceptionCode(1);
+
+        //Test 5. key not exist
+        $key = 'test';
+        $this->initial([])->param(TestData::TEST_DATA2)->key($key, 4)->result();
     }
 
     /**
