@@ -12,7 +12,7 @@ final class SearchParam
      * generate different params.
      *
      * @param string $key
-     * @param int $fuzzy
+     * @param int    $fuzzy
      *
      * @return string
      */
@@ -20,13 +20,13 @@ final class SearchParam
     {
         switch ($fuzzy) {
             case Constant::RIGHT:
-                return $key. '%';
+                return $key.'%';
 
             case Constant::LEFT:
-                return '%'. $key;
+                return '%'.$key;
 
             default:
-                return '%'. $key. '%';
+                return '%'.$key.'%';
         }
     }
 }
