@@ -18,7 +18,7 @@
 
 ## Installation
 
-```
+```text
 composer require "mitirrli/build-query" --no-dev
 ```
 
