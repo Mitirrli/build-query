@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Mitirrli\Buildable\Tests\Exception;
 
 use Mitirrli\Buildable\Buildable;
