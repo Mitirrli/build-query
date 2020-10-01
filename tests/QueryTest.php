@@ -76,7 +76,7 @@ class QueryTest extends TestCase
         $key = 'test';
         $new_key = 'new key';
 
-        $result = $this->param(TestData::TEST_DATA2)->key([$new_key, $key])->result();
+        $result = $this->param(TestData::TEST_DATA2)->key([$key, $new_key])->result();
 
         self::assertIsArray($result);
         self::assertArrayHasKey($new_key, $result);
@@ -84,7 +84,7 @@ class QueryTest extends TestCase
         //Test 1. accurate search
         $key = 'JS';
         $new_key = 'NEW_JS';
-        $object = $this->param(TestData::TEST_DATA3)->key([$new_key, $key]);
+        $object = $this->param(TestData::TEST_DATA3)->key([$key, $new_key]);
 
         $property = new \ReflectionProperty($object, 'init');
         $property->setAccessible(true);
@@ -93,7 +93,7 @@ class QueryTest extends TestCase
         //Test 2. right fuzzy search
         $key = 'PHP';
         $new_key = 'NEW_PHP';
-        $object = $this->param(TestData::TEST_DATA3)->key([$new_key, $key], Constant::RIGHT);
+        $object = $this->param(TestData::TEST_DATA3)->key([$key, $new_key], Constant::RIGHT);
 
         $property = new \ReflectionProperty($object, 'init');
         $property->setAccessible(true);
@@ -105,7 +105,7 @@ class QueryTest extends TestCase
         //Test 2. right fuzzy search
         $key = 'C';
         $new_key = 'NEW_C';
-        $object = $this->param(TestData::TEST_DATA3)->key([$new_key, $key], Constant::ALL);
+        $object = $this->param(TestData::TEST_DATA3)->key([$key, $new_key], Constant::ALL);
 
         $property = new \ReflectionProperty($object, 'init');
         $property->setAccessible(true);
