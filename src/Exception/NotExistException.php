@@ -6,5 +6,4 @@ namespace Mitirrli\Buildable\Exception;
 
 class NotExistException extends \Exception
 {
-
 }
