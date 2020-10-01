@@ -7,7 +7,7 @@ namespace Mitirrli\Buildable\Query;
 use Mitirrli\Buildable\Constant;
 use Mitirrli\Buildable\Exception\NotExistException;
 
-final class SearchParam
+trait SearchTrait
 {
     /**
      * generate different params.
@@ -19,7 +19,7 @@ final class SearchParam
      *
      * @return string
      */
-    public static function getFuzzyParam(string $key, int $fuzzy): string
+    public function getFuzzyParam(string $key, int $fuzzy): string
     {
         switch ($fuzzy) {
             case Constant::RIGHT:

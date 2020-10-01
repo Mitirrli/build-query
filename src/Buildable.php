@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Mitirrli\Buildable;
 
-use Mitirrli\Buildable\Query\SearchParam;
+use Mitirrli\Buildable\Query\SearchTrait;
 
 trait Buildable
 {
+    use SearchTrait;
+
     private $init = [];
 
     private $params = [];
@@ -65,7 +67,7 @@ trait Buildable
 
         $this->init[$name]
             = $fuzzy ?
-            ['LIKE', SearchParam::getFuzzyParam($this->params[$key], $fuzzy)]
+            ['LIKE', $this->getFuzzyParam($this->params[$key], $fuzzy)]
             : $this->params[$key];
 
         return $this;
@@ -104,12 +106,12 @@ trait Buildable
      */
     public function betweenKey(string $key, array $value = ['start' => 0, 'end' => 100])
     {
+        $this->init[$key] = ['<=', $this->params[$value['end']]];
+
         if (array_key_exists('start', $value) && array_key_exists('end', $value)) {
             $this->init[$key] = ['BETWEEN', [$this->params[$value['start']], $this->params[$value['end']]]];
         } elseif (array_key_exists('start', $value)) {
             $this->init[$key] = ['>=', $this->params[$value['start']]];
-        } else {
-            $this->init[$key] = ['<=', $this->params[$value['end']]];
         }
 
         return $this;

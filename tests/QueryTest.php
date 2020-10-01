@@ -5,7 +5,7 @@ namespace Mitirrli\Buildable\Tests;
 use Mitirrli\Buildable\Buildable;
 use Mitirrli\Buildable\Constant;
 use Mitirrli\Buildable\Exception\NotExistException;
-use Mitirrli\Buildable\Query\SearchParam;
+use Mitirrli\Buildable\Query\SearchTrait;
 use Mitirrli\Buildable\Tests\Constant\TestData;
 use PHPUnit\Framework\TestCase;
 
@@ -238,9 +238,9 @@ class QueryTest extends TestCase
     {
         $key = 'a';
 
-        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::ALL), '%'.$key.'%');
-        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::LEFT), '%'.$key);
-        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::RIGHT), $key.'%');
+        self::assertEquals($this->getFuzzyParam($key, Constant::ALL), '%'.$key.'%');
+        self::assertEquals($this->getFuzzyParam($key, Constant::LEFT), '%'.$key);
+        self::assertEquals($this->getFuzzyParam($key, Constant::RIGHT), $key.'%');
     }
 
     /**
