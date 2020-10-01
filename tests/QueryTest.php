@@ -4,6 +4,7 @@ namespace Mitirrli\Buildable\Tests;
 
 use Mitirrli\Buildable\Buildable;
 use Mitirrli\Buildable\Constant;
+use Mitirrli\Buildable\Exception\NotExistException;
 use Mitirrli\Buildable\Query\SearchParam;
 use Mitirrli\Buildable\Tests\Constant\TestData;
 use PHPUnit\Framework\TestCase;
@@ -61,7 +62,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$key]);
         self::assertEquals($test2[0], 'LIKE');
-        self::assertEquals($test2[1], TestData::TEST_DATA2[$key].'%');
+        self::assertEquals($test2[1], TestData::TEST_DATA2[$key] . '%');
 
         //Test 3. all fuzzy search
         $key = 'test';
@@ -72,7 +73,24 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$key]);
         self::assertEquals($test2[0], 'LIKE');
-        self::assertEquals($test2[1], '%'.TestData::TEST_DATA2[$key].'%');
+        self::assertEquals($test2[1], '%' . TestData::TEST_DATA2[$key] . '%');
+
+        //Test 4. test exception
+        $this->expectException(NotExistException::class);
+        $this->expectExceptionMessage('This value is not exist.');
+        $this->expectExceptionCode(1);
+
+        throw new NotExistException('This value is not exist.', 1);
+
+        //Test 5. key not exist
+        try {
+            $key = 'test';
+
+            $object = $this->initial([])->param(TestData::TEST_DATA2)->key($key, 4);
+        } catch (NotExistException $e) {
+            self::assertEquals($e->getMessage(), 'This value is not exist.');
+            self::assertEquals($e->getCode(), 1);
+        }
 
         $key = 'test';
         $new_key = 'new key';
@@ -101,7 +119,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$new_key]);
         self::assertEquals($test2[0], 'LIKE');
-        self::assertEquals($test2[1], TestData::TEST_DATA3[$key].'%');
+        self::assertEquals($test2[1], TestData::TEST_DATA3[$key] . '%');
 
         //Test 2. right fuzzy search
         $key = 'C';
@@ -113,7 +131,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$new_key]);
         self::assertEquals($test2[0], 'LIKE');
-        self::assertEquals($test2[1], '%'.TestData::TEST_DATA3[$key].'%');
+        self::assertEquals($test2[1], '%' . TestData::TEST_DATA3[$key] . '%');
     }
 
     /**
@@ -237,9 +255,9 @@ class QueryTest extends TestCase
     {
         $key = 'a';
 
-        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::ALL), '%'.$key.'%');
-        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::LEFT), '%'.$key);
-        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::RIGHT), $key.'%');
+        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::ALL), '%' . $key . '%');
+        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::LEFT), '%' . $key);
+        self::assertEquals(SearchParam::getFuzzyParam($key, Constant::RIGHT), $key . '%');
     }
 
     /**
