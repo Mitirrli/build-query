@@ -32,7 +32,7 @@ $this->param($params ?? [])
      ->key('avatar')
      ->key(['name', 'nickname'])
      ->inKey('type') //array search
-     ->betweenKey('created_at', 'started_at', 'ended_at') //between search
+     ->betweenKey('created_at', ['start' => 'create', 'end' => 'end']) //between search
      ->beforeKey('id') //before Key
      ->afterKey('id') //after kay
      ->unsetKey('initial') //unset param
