@@ -9,7 +9,7 @@ php:
 dist: trusty
 sudo: false
 
-install: travis_retry composer install --no-interaction --prefer-source --no-dev
+install: travis_retry composer install --no-interaction --prefer-source --dev
 
 script: vendor/bin/phpunit tests
 
