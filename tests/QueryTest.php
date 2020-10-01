@@ -20,8 +20,6 @@ class QueryTest extends TestCase
         $key = 'name';
         $object = $this->param(TestData::TEST_DATA2)->key($key);
 
-
-
         $property = new \ReflectionProperty($object, 'init');
         $property->setAccessible(true);
         self::assertEquals(TestData::TEST_DATA2[$key], $property->getValue($object)[$key]);
