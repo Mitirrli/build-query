@@ -91,8 +91,8 @@ trait Buildable
     /**
      * Between two keys.
      *
-     * @param string $key name of key
-     * @param array $time array of time
+     * @param string $key  name of key
+     * @param array  $time array of time
      *
      * @return $this
      *
