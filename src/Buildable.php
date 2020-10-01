@@ -43,10 +43,12 @@ trait Buildable
     /**
      * assign the value.
      *
-     * @param array|string $key   can be array or string
-     * @param int          $fuzzy fuzzy search
+     * @param array|string $key can be array or string
+     * @param int $fuzzy fuzzy search
      *
      * @return $this
+     *
+     * @throws Exception\NotExistException
      *
      * @example
      * <pre>
