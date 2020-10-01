@@ -20,6 +20,8 @@ class QueryTest extends TestCase
         $key = 'name';
         $object = $this->param(TestData::TEST_DATA2)->key($key);
 
+
+
         $property = new \ReflectionProperty($object, 'init');
         $property->setAccessible(true);
         self::assertEquals(TestData::TEST_DATA2[$key], $property->getValue($object)[$key]);
@@ -53,6 +55,12 @@ class QueryTest extends TestCase
 
         self::assertIsArray($result);
         self::assertArrayHasKey($new_key, $result);
+
+        //Test 4. key not exist
+        $result = $this->initial([])->param(TestData::TEST_DATA2)->key('no_exist')->result();
+        self::assertEquals($result, []);
+        $result = $this->initial([])->param(TestData::TEST_DATA2)->key(['no_exist', 'exists'])->result();
+        self::assertEquals($result, []);
 
         //Test 1. accurate search
         $key = 'JS';
