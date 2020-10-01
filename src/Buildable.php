@@ -102,7 +102,7 @@ trait Buildable
      */
     public function betweenKey(string $key, array $time)
     {
-        if (isset($this->params[$this['end']]) && isset($this->params[$time['start']])) {
+        if (isset($this->params[$time['end']]) && isset($this->params[$time['start']])) {
             $this->init[$key] = ['BETWEEN', [$this->params[$time['start']], $this->params[$time['end']]]];
         }
 
