@@ -91,24 +91,27 @@ trait Buildable
     /**
      * Between two keys.
      *
-     * @param string $key   name of key
-     * @param string $start start element
-     * @param string $end   end element
+     * @param string $key name of key
+     * @param array $time array of time
      *
      * @return $this
+     *
+     * <pre>
+     * $this->betweenKey('created_at', ['start' => 'create', 'end' => 'end']);
+     * </pre>
      */
-    public function betweenKey(string $key, string $start = '', string $end = '')
+    public function betweenKey(string $key, array $time)
     {
-        if (isset($this->params[$end]) && isset($this->params[$start])) {
-            $this->init[$key] = ['BETWEEN', [$this->params[$start], $this->params[$end]]];
+        if (isset($this->params[$this['end']]) && isset($this->params[$time['start']])) {
+            $this->init[$key] = ['BETWEEN', [$this->params[$time['start']], $this->params[$time['end']]]];
         }
 
-        if (!isset($this->params[$end]) && isset($this->params[$start])) {
-            $this->init[$key] = ['>=', $this->params[$start]];
+        if (!isset($this->params[$time['end']]) && isset($this->params[$time['start']])) {
+            $this->init[$key] = ['>=', $this->params[$time['start']]];
         }
 
-        if (!isset($this->params[$start]) && isset($this->params[$end])) {
-            $this->init[$key] = ['<=', $this->params[$end]];
+        if (!isset($this->params[$time['start']]) && isset($this->params[$time['end']])) {
+            $this->init[$key] = ['<=', $this->params[$time['end']]];
         }
 
         return $this;
