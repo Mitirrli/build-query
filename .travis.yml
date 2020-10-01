@@ -11,11 +11,7 @@ sudo: false
 
 install: travis_retry composer install --no-interaction --prefer-source --dev
 
-script: vendor/bin/phpunit tests
+script: vendor/bin/phpunit tests --coverage-clover build/logs/clover.xml
 
-after_script:
-  - |
-    if [[ $MORE != "" ]]; then
-      wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar;
-      php php-coveralls.phar -v;
-    fi
+after_success:
+  - travis_retry php vendor/bin/php-coveralls
