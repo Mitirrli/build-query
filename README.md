@@ -39,4 +39,3 @@ $this->param($params ?? [])
      ->unsetKey('initial')
      ->result();
 ```  
-  
