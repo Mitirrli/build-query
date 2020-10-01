@@ -43,8 +43,8 @@ trait Buildable
     /**
      * assign the value.
      *
-     * @param array|string $key   can be array or string
-     * @param int          $fuzzy fuzzy search
+     * @param array|string $key can be array or string
+     * @param int $fuzzy fuzzy search
      *
      * @return $this
      *
@@ -91,8 +91,8 @@ trait Buildable
     /**
      * Between two keys.
      *
-     * @param string $key  name of key
-     * @param array  $time array of time
+     * @param string $key name of key
+     * @param array $value array of value
      *
      * @return $this
      *
@@ -100,18 +100,14 @@ trait Buildable
      * $this->betweenKey('created_at', ['start' => 'create', 'end' => 'end']);
      * </pre>
      */
-    public function betweenKey(string $key, array $time)
+    public function betweenKey(string $key, array $value = ['start' => 0, 'end' => 100])
     {
-        if (isset($this->params[$time['end']]) && isset($this->params[$time['start']])) {
-            $this->init[$key] = ['BETWEEN', [$this->params[$time['start']], $this->params[$time['end']]]];
-        }
-
-        if (!isset($this->params[$time['end']]) && isset($this->params[$time['start']])) {
-            $this->init[$key] = ['>=', $this->params[$time['start']]];
-        }
-
-        if (!isset($this->params[$time['start']]) && isset($this->params[$time['end']])) {
-            $this->init[$key] = ['<=', $this->params[$time['end']]];
+        if (array_key_exists('start', $value) && array_key_exists('end', $value)) {
+            $this->init[$key] = ['BETWEEN', [$this->params[$value['start']], $this->params[$value['end']]]];
+        } elseif (array_key_exists('start', $value)) {
+            $this->init[$key] = ['>=', $this->params[$value['start']]];
+        } else {
+            $this->init[$key] = ['<=', $this->params[$value['end']]];
         }
 
         return $this;
@@ -120,7 +116,7 @@ trait Buildable
     /**
      * before one key.
      *
-     * @param string      $key  name of key
+     * @param string $key name of key
      * @param string|null $name final name of the key
      *
      * @return $this
@@ -137,7 +133,7 @@ trait Buildable
     /**
      * after one key.
      *
-     * @param string      $key  name of key
+     * @param string $key name of key
      * @param string|null $name final name of the key
      *
      * @return $this
