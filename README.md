@@ -18,12 +18,12 @@
 
 ## Installation
 
-```shell
+```
 $ composer require "mitirrli/build-query" --no-dev
 ```
 
 ## QuickStart
-```php
+```
 use Mitirrli\Buildable\Constant;
 
 $this->param($params ?? [])
