@@ -16,7 +16,7 @@
 ## Installation
 
 ```shell script
-$ composer require "mitirrli/build-query" --no-dev
+$ composer require mitirrli/build-query
 ```
 
 ## QuickStart
