@@ -2,9 +2,9 @@
 
 namespace Mitirrli\Buildable\Tests;
 
+use Mitirrli\Buildable\Buildable;
 use Mitirrli\Buildable\Constant;
 use Mitirrli\Buildable\Tests\Constant\TestData;
-use Mitirrli\Buildable\Buildable;
 use PHPUnit\Framework\TestCase;
 
 class QueryTest extends TestCase
