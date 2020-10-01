@@ -32,7 +32,7 @@ final class SearchParam
                 return '%' . $key . '%';
 
             default:
-                throw new NotExistException('This value is not exist.', '1');
+                throw new NotExistException('This value is not exist.', 1);
         }
     }
 }
