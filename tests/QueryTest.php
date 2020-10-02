@@ -32,7 +32,7 @@ class QueryTest extends TestCase
         $property->setAccessible(true);
 
         self::assertIsArray($test2 = $property->getValue($object)[$key]);
-        self::assertEquals($test2[0], 'LIKE');
+        self::assertEquals('LIKE', $test2[0]);
         self::assertEquals($test2[1], TestData::TEST_DATA2[$key].'%');
 
         //Test 3. all fuzzy search
@@ -43,7 +43,7 @@ class QueryTest extends TestCase
         $property->setAccessible(true);
 
         self::assertIsArray($test2 = $property->getValue($object)[$key]);
-        self::assertEquals($test2[0], 'LIKE');
+        self::assertEquals('LIKE', $test2[0]);
         self::assertEquals($test2[1], '%'.TestData::TEST_DATA2[$key].'%');
 
         $key = 'test';
@@ -56,9 +56,9 @@ class QueryTest extends TestCase
 
         //Test 4. key not exist
         $result = $this->initial([])->param(TestData::TEST_DATA2)->key('no_exist')->result();
-        self::assertEquals($result, []);
+        self::assertEquals([], $result);
         $result = $this->initial([])->param(TestData::TEST_DATA2)->key(['no_exist', 'exists'])->result();
-        self::assertEquals($result, []);
+        self::assertEquals([], $result);
 
         //Test 1. accurate search
         $key = 'JS';
@@ -78,7 +78,7 @@ class QueryTest extends TestCase
         $property->setAccessible(true);
 
         self::assertIsArray($test2 = $property->getValue($object)[$new_key]);
-        self::assertEquals($test2[0], 'LIKE');
+        self::assertEquals('LIKE', $test2[0]);
         self::assertEquals($test2[1], TestData::TEST_DATA3[$key].'%');
 
         //Test 2. right fuzzy search
@@ -90,7 +90,7 @@ class QueryTest extends TestCase
         $property->setAccessible(true);
 
         self::assertIsArray($test2 = $property->getValue($object)[$new_key]);
-        self::assertEquals($test2[0], 'LIKE');
+        self::assertEquals('LIKE', $test2[0]);
         self::assertEquals($test2[1], '%'.TestData::TEST_DATA3[$key].'%');
     }
 
@@ -102,13 +102,13 @@ class QueryTest extends TestCase
         //Test 1. Array
         $key = 'UN_UNIQUE_KEY';
         $result = $this->param(TestData::TEST_DATA4)->inKey($key)->result();
-        self::assertEquals($result[$key][0], 'IN');
+        self::assertEquals('IN', $result[$key][0]);
         self::assertIsArray($result);
         self::assertEquals($result[$key][1], array_unique(TestData::TEST_DATA4[$key]));
 
         //Test 2. String
         $result = $this->param(TestData::TEST_DATA6)->inKey($key)->result();
-        self::assertEquals($result[$key][0], 'IN');
+        self::assertEquals('IN', $result[$key][0]);
         self::assertIsArray($result);
         self::assertEquals($result[$key][1], array_unique(explode(',', TestData::TEST_DATA6[$key])));
     }
@@ -123,19 +123,19 @@ class QueryTest extends TestCase
         $test1 = $this->param(TestData::TEST_DATA5)->betweenKey($key, ['start' => 'start', 'end' => 'end'])->result();
 
         self::assertIsArray($test1);
-        self::assertEquals($test1[$key][0], 'BETWEEN');
+        self::assertEquals('BETWEEN', $test1[$key][0]);
         self::assertEquals($test1[$key][1], array_values(TestData::TEST_DATA5));
 
         //Test 2. <=
         $key = 'test2';
         $test2 = $this->param(TestData::TEST_DATA5)->betweenKey($key, ['end' => 'end'])->result();
-        self::assertEquals($test2[$key][0], '<=');
+        self::assertEquals('<=', $test2[$key][0]);
         self::assertEquals($test2[$key][1], TestData::TEST_DATA5['end']);
 
         //Test 3. >=
         $key = 'test3';
         $test3 = $this->param(TestData::TEST_DATA5)->betweenKey($key, ['start' => 'start'])->result();
-        self::assertEquals($test3[$key][0], '>=');
+        self::assertEquals('>=', $test3[$key][0]);
         self::assertEquals($test3[$key][1], TestData::TEST_DATA5['start']);
     }
 
@@ -149,7 +149,7 @@ class QueryTest extends TestCase
         $test1 = $this->param(TestData::TEST_DATA7)->beforeKey($key)->result();
 
         self::assertIsArray($test1);
-        self::assertEquals($test1[$key][0], '<');
+        self::assertEquals('<', $test1[$key][0]);
         self::assertEquals($test1[$key][1], TestData::TEST_DATA7[$key]);
 
         //Test 2. Two params
@@ -157,7 +157,7 @@ class QueryTest extends TestCase
         $test1 = $this->param(TestData::TEST_DATA7)->beforeKey($key, 'result')->result();
 
         self::assertIsArray($test1);
-        self::assertEquals($test1['result'][0], '<');
+        self::assertEquals('<', $test1['result'][0]);
         self::assertEquals($test1['result'][1], TestData::TEST_DATA7[$key]);
     }
 
@@ -171,7 +171,7 @@ class QueryTest extends TestCase
         $test1 = $this->param(TestData::TEST_DATA7)->afterKey($key)->result();
 
         self::assertIsArray($test1);
-        self::assertEquals($test1[$key][0], '>');
+        self::assertEquals('>', $test1[$key][0]);
         self::assertEquals($test1[$key][1], TestData::TEST_DATA7[$key]);
 
         //Test 2. Two param
@@ -179,7 +179,7 @@ class QueryTest extends TestCase
         $test1 = $this->param(TestData::TEST_DATA7)->afterKey($key, 'result')->result();
 
         self::assertIsArray($test1);
-        self::assertEquals($test1['result'][0], '>');
+        self::assertEquals('>', $test1['result'][0]);
         self::assertEquals($test1['result'][1], TestData::TEST_DATA7[$key]);
     }
 
