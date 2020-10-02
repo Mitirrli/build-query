@@ -126,6 +126,12 @@ trait Buildable
      * @param string|null $name final name of the key
      *
      * @return $this
+     *
+     * @example
+     * <pre>
+     * $this->beforeKey('x')
+     * $this->beforeKey('x', 'y');
+     * </pre>
      */
     public function beforeKey(string $key, string $name = null)
     {
