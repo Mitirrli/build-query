@@ -143,6 +143,12 @@ trait Buildable
      * @param string|null $name final name of the key
      *
      * @return $this
+     *
+     * @example
+     * <pre>
+     * $this->afterKey('x')
+     * $this->afterKey('x', 'y');
+     * </pre>
      */
     public function afterKey(string $key, string $name = null)
     {
