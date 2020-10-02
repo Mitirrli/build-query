@@ -81,6 +81,11 @@ trait Buildable
      * @param string $key name of key
      *
      * @return $this
+     *
+     * @example
+     * <pre>
+     * $this->inKey('x');
+     * </pre>
      */
     public function inKey(string $key)
     {
