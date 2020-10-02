@@ -102,6 +102,7 @@ trait Buildable
      *
      * @return $this
      *
+     * @example
      * <pre>
      * $this->betweenKey('created_at', ['start' => 'create', 'end' => 'end']);
      * </pre>
