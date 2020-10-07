@@ -20,6 +20,11 @@ trait Buildable
      * @param array $params
      *
      * @return $this
+     * 
+     * @example
+     * <pre>
+     * $this->param(['x' => 'y']);
+     * </pre>
      */
     public function param(array $params)
     {
@@ -34,6 +39,11 @@ trait Buildable
      * @param $init array default array
      *
      * @return $this
+     *
+     * @example
+     * <pre>
+     * $this->initial(['x' => 'y']);
+     * </pre>
      */
     public function initial(array $init)
     {
