@@ -20,7 +20,7 @@ trait Buildable
      * @param array $params
      *
      * @return $this
-     * 
+     *
      * @example
      * <pre>
      * $this->param(['x' => 'y']);
