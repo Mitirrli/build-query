@@ -65,9 +65,9 @@ trait Buildable
      * @example
      * <pre>
      * $this->key('x');
-     * $this->key(['x', 'y']);          //rename x as y
-     * $this->key('x', Search::RIGHT);  //right fuzzy search
-     * $this->key('x', Search::ALL);    //all fuzzy search
+     * $this->key(['x', 'y']);            //rename x as y
+     * $this->key('x', Constant::RIGHT);  //right fuzzy search
+     * $this->key('x', Constant::ALL);    //all fuzzy search
      * </pre>
      */
     public function key($key, int $fuzzy = Constant::NONE)
