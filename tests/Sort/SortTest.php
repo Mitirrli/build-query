@@ -24,7 +24,7 @@ class SortTest extends TestCase
 
         self::assertIsArray($test1);
         self::assertArrayHasKey('sort', $test1);
-        self::assertEquals($key . ' ' . TestSort::TEST_SORT1[$key], $test1['sort']);
+        self::assertEquals($key.' '.TestSort::TEST_SORT1[$key], $test1['sort']);
 
         //Test 2. rename sort
         $key = 'create_time';
@@ -33,7 +33,7 @@ class SortTest extends TestCase
 
         self::assertIsArray($test2);
         self::assertArrayHasKey($rename_key, $test2);
-        self::assertEquals($key . ' ' . TestSort::TEST_SORT1[$key], $test2[$rename_key]);
+        self::assertEquals($key.' '.TestSort::TEST_SORT1[$key], $test2[$rename_key]);
 
         //Test 3. rename array sort
         $key = 'create_time';
@@ -43,7 +43,7 @@ class SortTest extends TestCase
 
         self::assertIsArray($test3);
         self::assertArrayHasKey($rename_key, $test3);
-        self::assertEquals($sql_key . ' ' . TestSort::TEST_SORT1[$key], $test3[$rename_key]);
+        self::assertEquals($sql_key.' '.TestSort::TEST_SORT1[$key], $test3[$rename_key]);
 
         //Test 4. multi sort.
         $key2 = 'update_time';
@@ -51,14 +51,14 @@ class SortTest extends TestCase
 
         self::assertIsArray($test4);
         self::assertArrayHasKey('sort', $test4);
-        self::assertEquals($key2 . ' ' . TestSort::TEST_SORT2[$key2], $test4['sort']);
+        self::assertEquals($key2.' '.TestSort::TEST_SORT2[$key2], $test4['sort']);
 
         //Test 5. rename multi sort.
-        $test5 = $this->initial([])->param(TestSort::TEST_SORT2)->sort($key,'num1')->sort($key2,'num2')->result();
+        $test5 = $this->initial([])->param(TestSort::TEST_SORT2)->sort($key, 'num1')->sort($key2, 'num2')->result();
         self::assertIsArray($test5);
         self::assertArrayHasKey('num1', $test5);
-        self::assertEquals($key2 . ' ' . TestSort::TEST_SORT2[$key2], $test5['num2']);
-        self::assertEquals($key . ' ' . TestSort::TEST_SORT2[$key], $test5['num1']);
+        self::assertEquals($key2.' '.TestSort::TEST_SORT2[$key2], $test5['num2']);
+        self::assertEquals($key.' '.TestSort::TEST_SORT2[$key], $test5['num1']);
         self::assertArrayHasKey('num2', $test5);
     }
 }
