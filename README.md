@@ -26,7 +26,6 @@ use Mitirrli\Buildable\Constant;
 $this->param($params ?? [])
     ->initial(['initial' => 0])
     ->key('avatar')
-    ->key(['name', 'nickname'])
     ->key('name', Constant::RIGHT)
     ->key('name', Constant::ALL)
     ->inKey('type')
