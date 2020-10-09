@@ -2,6 +2,11 @@
     "name": "mitirrli/build-query",
     "description": "model query for orm.",
     "type": "library",
+    "keywords": [
+        "tools",
+        "framework",
+        "orm"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -19,12 +24,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Mitirrli\\Buildable\\": "./src/",
-            "Mitirrli\\Buildable\\Tests\\": "./tests"
+            "Mitirrli\\Buildable\\": "./src/"
         },
         "files": [
             "src/Extend/common.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mitirrli\\Buildable\\Tests\\": "./tests"
+        }
     },
     "scripts": {
         "cs-fix": "php-cs-fixer fix $1"
