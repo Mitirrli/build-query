@@ -106,7 +106,16 @@ class QueryTest extends TestCase
         self::assertIsArray($result);
         self::assertEquals($result[$key][1], array_unique(TestData::TEST_DATA4[$key]));
 
-        //Test 2. String
+        //Test 2. Rename
+        $key = 'UN_UNIQUE_KEY';
+        $rename_key = 'RENAME';
+
+        $result = $this->param(TestData::TEST_DATA4)->inKey([$key, $rename_key])->result();
+        self::assertEquals('IN', $result[$rename_key][0]);
+        self::assertIsArray($result);
+        self::assertEquals($result[$rename_key][1], array_unique(TestData::TEST_DATA4[$key]));
+
+        //Test 3. String
         $result = $this->param(TestData::TEST_DATA6)->inKey($key)->result();
         self::assertEquals('IN', $result[$key][0]);
         self::assertIsArray($result);
@@ -154,7 +163,7 @@ class QueryTest extends TestCase
 
         //Test 2. Two params
         $key = 'key';
-        $test1 = $this->param(TestData::TEST_DATA7)->beforeKey($key, 'result')->result();
+        $test1 = $this->param(TestData::TEST_DATA7)->beforeKey([$key, 'result'])->result();
 
         self::assertIsArray($test1);
         self::assertEquals('<', $test1['result'][0]);
@@ -176,7 +185,7 @@ class QueryTest extends TestCase
 
         //Test 2. Two param
         $key = 'key';
-        $test1 = $this->param(TestData::TEST_DATA7)->afterKey($key, 'result')->result();
+        $test1 = $this->param(TestData::TEST_DATA7)->afterKey([$key, 'result'])->result();
 
         self::assertIsArray($test1);
         self::assertEquals('>', $test1['result'][0]);
