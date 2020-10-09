@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Mitirrli\Buildable;
 
-use Mitirrli\Buildable\Query\RenameTrait;
 use Mitirrli\Buildable\Query\SearchTrait;
 
 trait Buildable
 {
     use SearchTrait;
-    use RenameTrait;
 
     private $init = [];
 
@@ -74,7 +72,7 @@ trait Buildable
      */
     public function key($key, int $fuzzy = Constant::NONE)
     {
-        $result = $this->rename($key);
+        $result = $this->renameParam($key);
 
         if (param_exist($this->params, $result['key'])) {
             $this->init[$result['name']]
@@ -101,7 +99,7 @@ trait Buildable
      */
     public function inKey($key)
     {
-        $result = $this->rename($key);
+        $result = $this->renameParam($key);
 
         if (param_exist($this->params, $result['key'])) {
             if (is_string($key = $this->params[$result['key']])) {
@@ -157,7 +155,7 @@ trait Buildable
      */
     public function beforeKey($key)
     {
-        $result = $this->rename($key);
+        $result = $this->renameParam($key);
 
         if (param_exist($this->params, $key = $result['key'])) {
             $this->init[$result['name']] = ['<', $this->params[$key]];
@@ -181,7 +179,7 @@ trait Buildable
      */
     public function afterKey($key)
     {
-        $result = $this->rename($key);
+        $result = $this->renameParam($key);
 
         if (param_exist($this->params, $key = $result['key'])) {
             $this->init[$result['name']] = ['>', $this->params[$key]];
