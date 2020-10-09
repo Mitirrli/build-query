@@ -125,16 +125,16 @@ trait Buildable
     public function betweenKey(string $key, array $value)
     {
         if (array_key_exists('start', $value) && array_key_exists('end', $value)
-            && isset($this->params[$value['end']]) && !empty($this->params[$value['end']])
-            && isset($this->params[$value['start']]) && !empty($this->params[$value['start']])
+            && isset($this->params[$value['end']]) && $this->params[$value['end']] !== ''
+            && isset($this->params[$value['start']]) && $this->params[$value['start']] !== ''
         ) {
             $this->init[$key] = ['BETWEEN', [$this->params[$value['start']], $this->params[$value['end']]]];
         } elseif (array_key_exists('start', $value)
-            && isset($this->params[$value['start']]) && !empty($this->params[$value['start']])
+            && isset($this->params[$value['start']]) && $this->params[$value['start']] !== ''
         ) {
             $this->init[$key] = ['>=', $this->params[$value['start']]];
         } elseif (array_key_exists('end', $value)
-            && isset($this->params[$value['end']]) && !empty($this->params[$value['end']])
+            && isset($this->params[$value['end']]) && $this->params[$value['end']] !== ''
         ) {
             $this->init[$key] = ['<=', $this->params[$value['end']]];
         }
