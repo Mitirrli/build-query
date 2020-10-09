@@ -57,8 +57,8 @@ trait Buildable
     /**
      * assign the value.
      *
-     * @param array|string $key can be array or string
-     * @param int $fuzzy fuzzy search
+     * @param array|string $key   can be array or string
+     * @param int          $fuzzy fuzzy search
      *
      * @return $this
      *
@@ -116,8 +116,8 @@ trait Buildable
     /**
      * Between two keys.
      *
-     * @param string $key name of key
-     * @param array $value array of value
+     * @param string $key   name of key
+     * @param array  $value array of value
      *
      * @return $this
      *
@@ -144,7 +144,8 @@ trait Buildable
     /**
      * before one key.
      *
-     * @param string|array $key name of key
+     * @param string $key name of key
+     * @param string|null $name final name of the key
      *
      * @return $this
      *
