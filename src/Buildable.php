@@ -55,12 +55,12 @@ trait Buildable
     /**
      * assign the value.
      *
-     * @param array|string $key can be array or string
-     * @param int $fuzzy fuzzy search
-     *
-     * @return $this
+     * @param array|string $key   can be array or string
+     * @param int          $fuzzy fuzzy search
      *
      * @throws Exception\NotExistException
+     *
+     * @return $this
      *
      * @example
      * <pre>
@@ -112,8 +112,8 @@ trait Buildable
     /**
      * Between two keys.
      *
-     * @param string $key name of key
-     * @param array $value array of value
+     * @param string $key   name of key
+     * @param array  $value array of value
      *
      * @return $this
      *
@@ -140,7 +140,7 @@ trait Buildable
     /**
      * before one key.
      *
-     * @param string $key name of key
+     * @param string      $key  name of key
      * @param string|null $name final name of the key
      *
      * @return $this
@@ -163,7 +163,7 @@ trait Buildable
     /**
      * after one key.
      *
-     * @param string $key name of key
+     * @param string      $key  name of key
      * @param string|null $name final name of the key
      *
      * @return $this
