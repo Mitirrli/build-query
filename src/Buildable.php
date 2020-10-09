@@ -72,7 +72,7 @@ trait Buildable
      */
     public function key($key, int $fuzzy = Constant::NONE)
     {
-        $result = $this->renameParam($key);
+        $result = $this->renameKey($key);
 
         if (param_exist($this->params, $result['key'])) {
             $this->init[$result['name']]
@@ -99,7 +99,7 @@ trait Buildable
      */
     public function inKey($key)
     {
-        $result = $this->renameParam($key);
+        $result = $this->renameKey($key);
 
         if (param_exist($this->params, $result['key'])) {
             if (is_string($key = $this->params[$result['key']])) {
@@ -155,7 +155,7 @@ trait Buildable
      */
     public function beforeKey($key)
     {
-        $result = $this->renameParam($key);
+        $result = $this->renameKey($key);
 
         if (param_exist($this->params, $key = $result['key'])) {
             $this->init[$result['name']] = ['<', $this->params[$key]];
@@ -179,7 +179,7 @@ trait Buildable
      */
     public function afterKey($key)
     {
-        $result = $this->renameParam($key);
+        $result = $this->renameKey($key);
 
         if (param_exist($this->params, $key = $result['key'])) {
             $this->init[$result['name']] = ['>', $this->params[$key]];

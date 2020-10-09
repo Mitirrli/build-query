@@ -42,7 +42,7 @@ trait SearchTrait
      *
      * @return array
      */
-    public function renameParam($key)
+    public function renameKey($key)
     {
         $name = is_array($key) ? $key[1] : $key;
         $key = is_array($key) ? $key[0] : $key;
