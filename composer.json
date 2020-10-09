@@ -21,7 +21,10 @@
         "psr-4": {
             "Mitirrli\\Buildable\\": "./src/",
             "Mitirrli\\Buildable\\Tests\\": "./tests"
-        }
+        },
+        "files": [
+            "src/Extend/common.php"
+        ]
     },
     "scripts": {
         "cs-fix": "php-cs-fixer fix $1"
