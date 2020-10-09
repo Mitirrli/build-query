@@ -22,6 +22,7 @@ $ composer require mitirrli/build-query
 ## QuickStart
 ```php
 use Mitirrli\Buildable\Constant;
+use Mitirrli\Buildable\Buildable;
 
 $this->param($params ?? [])
     ->initial(['initial' => 0])
@@ -33,5 +34,6 @@ $this->param($params ?? [])
     ->beforeKey('id')
     ->afterKey('id')
     ->unsetKey('initial')
+    ->sort('created_at')                
     ->result();
 ```  
