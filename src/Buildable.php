@@ -55,12 +55,12 @@ trait Buildable
     /**
      * assign the value.
      *
-     * @param array|string $key   can be array or string
-     * @param int          $fuzzy fuzzy search
-     *
-     * @throws Exception\NotExistException
+     * @param array|string $key can be array or string
+     * @param int $fuzzy fuzzy search
      *
      * @return $this
+     *
+     * @throws Exception\NotExistException
      *
      * @example
      * <pre>
@@ -75,7 +75,7 @@ trait Buildable
         $name = is_array($key) ? $key[1] : $key;
         $key = is_array($key) ? $key[0] : $key;
 
-        if (param_exist($this->params[$key])) {
+        if (param_exist($this->params, $key)) {
             $this->init[$name]
                 = $fuzzy ?
                 ['LIKE', $this->getFuzzyParam($this->params[$key], $fuzzy)]
@@ -99,7 +99,7 @@ trait Buildable
      */
     public function inKey(string $key)
     {
-        if (param_exist($this->params[$key])) {
+        if (param_exist($this->params, $key)) {
             if (is_string($this->params[$key])) {
                 $this->params[$key] = explode(',', $this->params[$key]);
             }
@@ -112,8 +112,8 @@ trait Buildable
     /**
      * Between two keys.
      *
-     * @param string $key   name of key
-     * @param array  $value array of value
+     * @param string $key name of key
+     * @param array $value array of value
      *
      * @return $this
      *
@@ -125,12 +125,12 @@ trait Buildable
     public function betweenKey(string $key, array $value)
     {
         if (array_key_exists('start', $value) && array_key_exists('end', $value)
-            && param_exist($this->params[$value['end']]) && param_exist($this->params[$value['start']])
+            && param_exist($this->params, $value['end']) && param_exist($this->params, $value['start'])
         ) {
             $this->init[$key] = ['BETWEEN', [$this->params[$value['start']], $this->params[$value['end']]]];
-        } elseif (array_key_exists('start', $value) && param_exist($this->params[$value['start']])) {
+        } elseif (array_key_exists('start', $value) && param_exist($this->params, $value['start'])) {
             $this->init[$key] = ['>=', $this->params[$value['start']]];
-        } elseif (array_key_exists('end', $value) && param_exist($this->params[$value['end']])) {
+        } elseif (array_key_exists('end', $value) && param_exist($this->params, $value['end'])) {
             $this->init[$key] = ['<=', $this->params[$value['end']]];
         }
 
@@ -140,7 +140,7 @@ trait Buildable
     /**
      * before one key.
      *
-     * @param string      $key  name of key
+     * @param string $key name of key
      * @param string|null $name final name of the key
      *
      * @return $this
@@ -153,7 +153,7 @@ trait Buildable
      */
     public function beforeKey(string $key, string $name = null)
     {
-        if (param_exist($this->params[$key])) {
+        if (param_exist($this->params, $key)) {
             $this->init[$name ?? $key] = ['<', $this->params[$key]];
         }
 
@@ -163,7 +163,7 @@ trait Buildable
     /**
      * after one key.
      *
-     * @param string      $key  name of key
+     * @param string $key name of key
      * @param string|null $name final name of the key
      *
      * @return $this
@@ -176,7 +176,7 @@ trait Buildable
      */
     public function afterKey(string $key, string $name = null)
     {
-        if (param_exist($this->params[$key])) {
+        if (param_exist($this->params, $key)) {
             $this->init[$name ?? $key] = ['>', $this->params[$key]];
         }
 
