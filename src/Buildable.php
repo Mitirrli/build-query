@@ -140,8 +140,8 @@ trait Buildable
     /**
      * before one key.
      *
-     * @param array|string $key name of key
-     * @param string|null $name final name of the key
+     * @param array|string $key  name of key
+     * @param string|null  $name final name of the key
      *
      * @return $this
      *
