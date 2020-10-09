@@ -13,26 +13,40 @@ trait SearchTrait
      * generate different params.
      *
      * @param string $key
-     * @param int    $fuzzy
-     *
-     * @throws NotExistException
+     * @param int $fuzzy
      *
      * @return string
+     * @throws NotExistException
      */
     public function getFuzzyParam(string $key, int $fuzzy): string
     {
         switch ($fuzzy) {
             case Constant::RIGHT:
-                return $key.'%';
+                return $key . '%';
 
             case Constant::LEFT:
-                return '%'.$key;
+                return '%' . $key;
 
             case Constant::ALL:
-                return '%'.$key.'%';
+                return '%' . $key . '%';
 
             default:
                 throw new NotExistException('This value is not exist.', 1);
         }
+    }
+
+    /**
+     * rename key for what you want.
+     *
+     * @param array|string $key
+     *
+     * @return array
+     */
+    public function renameParam($key)
+    {
+        $name = is_array($key) ? $key[1] : $key;
+        $key = is_array($key) ? $key[0] : $key;
+
+        return compact('name', 'key');
     }
 }
