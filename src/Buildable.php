@@ -75,7 +75,7 @@ trait Buildable
         $name = is_array($key) ? $key[1] : $key;
         $key = is_array($key) ? $key[0] : $key;
 
-        if (isset($this->params[$key]) && !empty($this->params[$key])) {
+        if (param_exist($this->params[$key])) {
             $this->init[$name]
                 = $fuzzy ?
                 ['LIKE', $this->getFuzzyParam($this->params[$key], $fuzzy)]
@@ -99,7 +99,7 @@ trait Buildable
      */
     public function inKey(string $key)
     {
-        if (isset($this->params[$key]) && !empty($this->params[$key])) {
+        if (param_exist($this->params[$key])) {
             if (is_string($this->params[$key])) {
                 $this->params[$key] = explode(',', $this->params[$key]);
             }
@@ -125,17 +125,12 @@ trait Buildable
     public function betweenKey(string $key, array $value)
     {
         if (array_key_exists('start', $value) && array_key_exists('end', $value)
-            && isset($this->params[$value['end']]) && $this->params[$value['end']] !== ''
-            && isset($this->params[$value['start']]) && $this->params[$value['start']] !== ''
+            && param_exist($this->params[$value['end']]) && param_exist($this->params[$value['start']])
         ) {
             $this->init[$key] = ['BETWEEN', [$this->params[$value['start']], $this->params[$value['end']]]];
-        } elseif (array_key_exists('start', $value)
-            && isset($this->params[$value['start']]) && $this->params[$value['start']] !== ''
-        ) {
+        } elseif (array_key_exists('start', $value) && param_exist($this->params[$value['start']])) {
             $this->init[$key] = ['>=', $this->params[$value['start']]];
-        } elseif (array_key_exists('end', $value)
-            && isset($this->params[$value['end']]) && $this->params[$value['end']] !== ''
-        ) {
+        } elseif (array_key_exists('end', $value) && param_exist($this->params[$value['end']])) {
             $this->init[$key] = ['<=', $this->params[$value['end']]];
         }
 
@@ -158,7 +153,7 @@ trait Buildable
      */
     public function beforeKey(string $key, string $name = null)
     {
-        if (isset($this->params[$key]) && !empty($this->params[$key])) {
+        if (param_exist($this->params[$key])) {
             $this->init[$name ?? $key] = ['<', $this->params[$key]];
         }
 
@@ -181,7 +176,7 @@ trait Buildable
      */
     public function afterKey(string $key, string $name = null)
     {
-        if (isset($this->params[$key]) && !empty($this->params[$key])) {
+        if (param_exist($this->params[$key])) {
             $this->init[$name ?? $key] = ['>', $this->params[$key]];
         }
 
