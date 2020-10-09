@@ -58,9 +58,9 @@ trait Buildable
      * @param array|string $key   can be array or string
      * @param int          $fuzzy fuzzy search
      *
-     * @return $this
-     *
      * @throws Exception\NotExistException
+     *
+     * @return $this
      *
      * @example
      * <pre>
@@ -142,7 +142,7 @@ trait Buildable
     /**
      * before one key.
      *
-     * @param string $key name of key
+     * @param string      $key  name of key
      * @param string|null $name final name of the key
      *
      * @return $this
