@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Mitirrli\Buildable;
 
-use Mitirrli\Buildable\Query\SearchTrait;
-
 trait Buildable
 {
-    use SearchTrait;
+    use Sortable;
 
     private $init = [];
 
