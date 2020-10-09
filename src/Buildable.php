@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Mitirrli\Buildable;
 
+use Mitirrli\Buildable\Query\RenameTrait;
 use Mitirrli\Buildable\Query\SearchTrait;
 
 trait Buildable
 {
     use SearchTrait;
+    use RenameTrait;
 
     private $init = [];
 
@@ -72,14 +74,13 @@ trait Buildable
      */
     public function key($key, int $fuzzy = Constant::NONE)
     {
-        $name = is_array($key) ? $key[1] : $key;
-        $key = is_array($key) ? $key[0] : $key;
+        $result = $this->rename($key);
 
-        if (param_exist($this->params, $key)) {
-            $this->init[$name]
+        if (param_exist($this->params, $result['key'])) {
+            $this->init[$result['name']]
                 = $fuzzy ?
-                ['LIKE', $this->getFuzzyParam($this->params[$key], $fuzzy)]
-                : $this->params[$key];
+                ['LIKE', $this->getFuzzyParam($this->params[$result['key']], $fuzzy)]
+                : $this->params[$result['key']];
         }
 
         return $this;
@@ -88,22 +89,25 @@ trait Buildable
     /**
      * in some keys.
      *
-     * @param string $key name of key
+     * @param array|string $key name of key
      *
      * @return $this
      *
      * @example
      * <pre>
      * $this->inKey('x');
+     * $this->inKey(['x', 'y']);   //rename x as y
      * </pre>
      */
-    public function inKey(string $key)
+    public function inKey($key)
     {
-        if (param_exist($this->params, $key)) {
-            if (is_string($this->params[$key])) {
-                $this->params[$key] = explode(',', $this->params[$key]);
+        $result = $this->rename($key);
+
+        if (param_exist($this->params, $result['key'])) {
+            if (is_string($key = $this->params[$result['key']])) {
+                $key = explode(',', $key);
             }
-            $this->init[$key] = ['IN', array_unique($this->params[$key])];
+            $this->init[$result['name']] = ['IN', array_unique($key)];
         }
 
         return $this;
@@ -140,21 +144,22 @@ trait Buildable
     /**
      * before one key.
      *
-     * @param string $key name of key
-     * @param string|null $name final name of the key
+     * @param string|array $key name of key
      *
      * @return $this
      *
      * @example
      * <pre>
      * $this->beforeKey('x')
-     * $this->beforeKey('x', 'y');
+     * $this->beforeKey(['x', 'y']);   //rename x as y
      * </pre>
      */
-    public function beforeKey(string $key, string $name = null)
+    public function beforeKey($key)
     {
-        if (param_exist($this->params, $key)) {
-            $this->init[$name ?? $key] = ['<', $this->params[$key]];
+        $result = $this->rename($key);
+
+        if (param_exist($this->params, $key = $result['key'])) {
+            $this->init[$result['name']] = ['<', $this->params[$key]];
         }
 
         return $this;
@@ -163,21 +168,22 @@ trait Buildable
     /**
      * after one key.
      *
-     * @param string $key name of key
-     * @param string|null $name final name of the key
+     * @param array|string $key name of key
      *
      * @return $this
      *
      * @example
      * <pre>
      * $this->afterKey('x')
-     * $this->afterKey('x', 'y');
+     * $this->afterKey(['x', 'y']);   //rename x as y
      * </pre>
      */
-    public function afterKey(string $key, string $name = null)
+    public function afterKey($key)
     {
-        if (param_exist($this->params, $key)) {
-            $this->init[$name ?? $key] = ['>', $this->params[$key]];
+        $result = $this->rename($key);
+
+        if (param_exist($this->params, $key = $result['key'])) {
+            $this->init[$result['name']] = ['>', $this->params[$key]];
         }
 
         return $this;
