@@ -136,7 +136,7 @@ trait Buildable
         } elseif (array_key_exists('end', $value)
             && isset($this->params[$value['end']]) && !empty($this->params[$value['end']])
         ) {
-            $this->init[$key] = ['<=', $this->params[$value['end'] ?? 0] ?? 0];
+            $this->init[$key] = ['<=', $this->params[$value['end']]];
         }
 
         return $this;
