@@ -1,8 +1,8 @@
 <?php
 
 if (!function_exists('param_exist')) {
-    function param_exist(string $var)
+    function param_exist(array $params, string $key)
     {
-        return (isset($var) && $var !== '') ? true : false;
+        return (isset($params[$key]) && $params[$key] !== '') ? true : false;
     }
 }
