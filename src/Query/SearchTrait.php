@@ -13,22 +13,23 @@ trait SearchTrait
      * generate different params.
      *
      * @param string $key
-     * @param int $fuzzy
+     * @param int    $fuzzy
+     *
+     * @throws NotExistException
      *
      * @return string
-     * @throws NotExistException
      */
     public function getFuzzyParam(string $key, int $fuzzy): string
     {
         switch ($fuzzy) {
             case Constant::RIGHT:
-                return $key . '%';
+                return $key.'%';
 
             case Constant::LEFT:
-                return '%' . $key;
+                return '%'.$key;
 
             case Constant::ALL:
-                return '%' . $key . '%';
+                return '%'.$key.'%';
 
             default:
                 throw new NotExistException('This value is not exist.', 1);
