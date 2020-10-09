@@ -122,7 +122,7 @@ trait Buildable
      * $this->betweenKey('created_at', ['start' => 'create', 'end' => 'end']);
      * </pre>
      */
-    public function betweenKey(string $key, array $value = ['start' => 0, 'end' => 100])
+    public function betweenKey(string $key, array $value)
     {
         if (array_key_exists('start', $value) && array_key_exists('end', $value)
             && isset($this->params[$value['end']]) && !empty($this->params[$value['end']])
