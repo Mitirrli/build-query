@@ -31,9 +31,21 @@ trait Sortable
         $result = $this->renameKey($key);
 
         if (param_exist($this->params, $result['key'])) {
-            $this->init[$name] = $result['name'].' '.$this->params[$result['key']];
+            $this->order[$name] = $result['name'] . ' ' . $this->params[$result['key']];
         }
 
         return $this;
+    }
+
+    /**
+     * get order.
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    public function order(string $name = 'sort'): string
+    {
+        return $this->order[$name];
     }
 }
