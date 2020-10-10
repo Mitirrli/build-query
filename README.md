@@ -20,6 +20,8 @@ $ composer require mitirrli/build-query
 ```
 
 ## QuickStart
+
+1. Common filter
 ```php
 use Mitirrli\Buildable\Constant;
 use Mitirrli\Buildable\Buildable;
@@ -37,3 +39,10 @@ $this->param($params ?? [])
     ->sort('created_at')                
     ->result();
 ```  
+
+2. Get order
+```php
+use Mitirrli\Buildable\Buildable;
+
+$this->order();
+```
