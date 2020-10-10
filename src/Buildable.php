@@ -12,6 +12,8 @@ trait Buildable
 
     private $params = [];
 
+    private $order = [];
+
     /**
      * get user params.
      *
