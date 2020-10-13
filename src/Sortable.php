@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Mitirrli\Buildable;
 
-use Mitirrli\Buildable\Query\SearchTrait;
+use Mitirrli\Buildable\Query\BaseTrait;
 
 trait Sortable
 {
-    use SearchTrait;
+    use BaseTrait;
 
     /**
      * add sort for mysql, front params like ['create_time' => 'asc'].
@@ -31,7 +31,7 @@ trait Sortable
         $result = $this->renameKey($key);
 
         if (param_exist($this->params, $result['key'])) {
-            $this->order[$name] = $result['name'].' '.$this->params[$result['key']];
+            $this->init[$name] = $result['name'].' '.$this->params[$result['key']];
         }
 
         return $this;
@@ -44,8 +44,8 @@ trait Sortable
      *
      * @return string
      */
-    public function order(string $name = 'sort'): string
+    public function result(string $name = 'sort'): string
     {
-        return $this->order[$name];
+        return $this->init[$name];
     }
 }

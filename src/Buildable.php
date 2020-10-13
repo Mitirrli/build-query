@@ -4,53 +4,11 @@ declare(strict_types=1);
 
 namespace Mitirrli\Buildable;
 
+use Mitirrli\Buildable\Query\BaseTrait;
+
 trait Buildable
 {
-    use Sortable;
-
-    private $init = [];
-
-    private $params = [];
-
-    private $order = [];
-
-    /**
-     * get user params.
-     *
-     * @param array $params
-     *
-     * @return $this
-     *
-     * @example
-     * <pre>
-     * $this->param(['x' => 'y']);
-     * </pre>
-     */
-    public function param(array $params)
-    {
-        $this->params = $params;
-
-        return $this;
-    }
-
-    /**
-     * set default array.
-     *
-     * @param $init array default array
-     *
-     * @return $this
-     *
-     * @example
-     * <pre>
-     * $this->initial(['x' => 'y']);
-     * </pre>
-     */
-    public function initial(array $init)
-    {
-        $this->init = $init;
-
-        return $this;
-    }
+    use BaseTrait;
 
     /**
      * assign the value.
@@ -143,7 +101,6 @@ trait Buildable
      * before one key.
      *
      * @param array|string $key  name of key
-     * @param string|null  $name final name of the key
      *
      * @return $this
      *
@@ -207,15 +164,5 @@ trait Buildable
         }, $key);
 
         return $this;
-    }
-
-    /**
-     * get result.
-     *
-     * @return array
-     */
-    public function result(): array
-    {
-        return $this->init;
     }
 }
