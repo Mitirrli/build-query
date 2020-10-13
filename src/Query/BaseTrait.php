@@ -69,8 +69,9 @@ trait BaseTrait
      *
      * @param string $name
      *
-     * @return string
      * @throws NotExistException
+     *
+     * @return string
      *
      * @example
      * <pre>
