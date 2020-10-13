@@ -100,7 +100,7 @@ trait Buildable
     /**
      * before one key.
      *
-     * @param array|string $key  name of key
+     * @param array|string $key name of key
      *
      * @return $this
      *
