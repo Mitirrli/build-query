@@ -42,7 +42,10 @@ $this->param($params ?? [])
 
 2. Get order
 ```php
-use Mitirrli\Buildable\Buildable;
+use Mitirrli\Buildable\Sortable;
 
-$this->order();
+$this->param($params ?? [])
+    ->initial(['time' => 'desc'])
+    ->sort('time')
+    ->result();
 ```
