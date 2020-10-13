@@ -13,11 +13,11 @@ class SortTest extends TestCase
 
     /**
      * test NotExistException.
-<<<<<<< HEAD
-=======
+     * <<<<<<< HEAD
+     * =======
      *
      * @throws NotExistException
->>>>>>> dfe75c569236dcd17e91f33443edcb3129b76628
+     *                           >>>>>>> dfe75c569236dcd17e91f33443edcb3129b76628
      */
     public function testSort()
     {
