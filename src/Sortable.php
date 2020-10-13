@@ -15,8 +15,8 @@ trait Sortable
      * add sort for mysql, front params like ['create_time' => 'asc'].
      * if multi sort, only select the last one.
      *
-     * @param array|string $key name of key
-     * @param string $name the key of init
+     * @param array|string $key  name of key
+     * @param string       $name the key of init
      *
      * @return $this
      *
@@ -32,7 +32,7 @@ trait Sortable
         $result = $this->renameKey($key);
 
         if (param_exist($this->params, $result['key'])) {
-            $this->init[$name] = $result['name'] . ' ' . $this->params[$result['key']];
+            $this->init[$name] = $result['name'].' '.$this->params[$result['key']];
         }
 
         return $this;
@@ -43,9 +43,9 @@ trait Sortable
      *
      * @param string $name
      *
-     * @return string
-     *
      * @throws NotExistException
+     *
+     * @return string
      */
     public function result(string $name = 'sort'): string
     {
