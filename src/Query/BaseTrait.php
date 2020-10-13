@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mitirrli\Buildable\Query;
 
+use Mitirrli\Buildable\Exception\NotExistException;
+
 trait BaseTrait
 {
     use SearchTrait;
@@ -60,5 +62,27 @@ trait BaseTrait
     public function result(): array
     {
         return $this->init;
+    }
+
+    /**
+     * get order result.
+     *
+     * @param string $name
+     *
+     * @return string
+     * @throws NotExistException
+     *
+     * @example
+     * <pre>
+     * $this->order();
+     * </pre>
+     */
+    public function order(string $name = 'sort'): string
+    {
+        if (!array_key_exists($name, $this->init)) {
+            throw new NotExistException('This key is not exist.', 2);
+        }
+
+        return $this->init[$name];
     }
 }

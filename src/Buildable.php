@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Mitirrli\Buildable;
 
-use Mitirrli\Buildable\Query\BaseTrait;
-
 trait Buildable
 {
-    use BaseTrait;
+    use Sortable;
 
     /**
      * assign the value.

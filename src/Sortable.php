@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Mitirrli\Buildable;
 
-use Mitirrli\Buildable\Exception\NotExistException;
 use Mitirrli\Buildable\Query\BaseTrait;
 
 trait Sortable
@@ -36,23 +35,5 @@ trait Sortable
         }
 
         return $this;
-    }
-
-    /**
-     * get order.
-     *
-     * @param string $name
-     *
-     * @return string
-     *
-     * @throws NotExistException
-     */
-    public function result(string $name = 'sort'): string
-    {
-        if (!array_key_exists($name, $this->init)) {
-            throw new NotExistException('This key is not exist.', 2);
-        }
-
-        return $this->init[$name];
     }
 }
