@@ -33,7 +33,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$key]);
         self::assertEquals('LIKE', $test2[0]);
-        self::assertEquals($test2[1], TestData::TEST_DATA2[$key] . '%');
+        self::assertEquals($test2[1], TestData::TEST_DATA2[$key].'%');
 
         //Test 3. all fuzzy search
         $key = 'test';
@@ -44,7 +44,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$key]);
         self::assertEquals('LIKE', $test2[0]);
-        self::assertEquals($test2[1], '%' . TestData::TEST_DATA2[$key] . '%');
+        self::assertEquals($test2[1], '%'.TestData::TEST_DATA2[$key].'%');
 
         $key = 'test';
         $new_key = 'new key';
@@ -79,7 +79,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$new_key]);
         self::assertEquals('LIKE', $test2[0]);
-        self::assertEquals($test2[1], TestData::TEST_DATA3[$key] . '%');
+        self::assertEquals($test2[1], TestData::TEST_DATA3[$key].'%');
 
         //Test 2. right fuzzy search
         $key = 'C';
@@ -91,7 +91,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$new_key]);
         self::assertEquals('LIKE', $test2[0]);
-        self::assertEquals($test2[1], '%' . TestData::TEST_DATA3[$key] . '%');
+        self::assertEquals($test2[1], '%'.TestData::TEST_DATA3[$key].'%');
     }
 
     /**

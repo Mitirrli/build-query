@@ -14,7 +14,7 @@ class SortTest extends TestCase
     /**
      * test NotExistException.
      * <<<<<<< HEAD
-     * =======
+     * =======.
      *
      * @throws NotExistException
      *                           >>>>>>> dfe75c569236dcd17e91f33443edcb3129b76628
