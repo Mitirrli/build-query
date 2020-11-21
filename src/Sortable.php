@@ -31,8 +31,8 @@ trait Sortable
         $result = $this->renameKey($key);
 
         if (param_exist($this->params, $result['key'])) {
-            $this->init[$name] = $result['name'] .
-                ' ' .
+            $this->init[$name] = $result['name'].
+                ' '.
                 $this->params[$result['key']];
         }
 
