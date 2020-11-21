@@ -6,7 +6,6 @@ use Mitirrli\Buildable\Buildable;
 use Mitirrli\Buildable\Constant;
 use Mitirrli\Buildable\Tests\Constant\TestData;
 use PHPUnit\Framework\TestCase;
-use Mitirrli\Buildable\Tests\MultiInKey;
 
 class QueryTest extends TestCase
 {
@@ -34,7 +33,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$key]);
         self::assertEquals('LIKE', $test2[0]);
-        self::assertEquals($test2[1], TestData::TEST_DATA2[$key] . '%');
+        self::assertEquals($test2[1], TestData::TEST_DATA2[$key].'%');
 
         //Test 3. all fuzzy search
         $key = 'test';
@@ -45,7 +44,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$key]);
         self::assertEquals('LIKE', $test2[0]);
-        self::assertEquals($test2[1], '%' . TestData::TEST_DATA2[$key] . '%');
+        self::assertEquals($test2[1], '%'.TestData::TEST_DATA2[$key].'%');
 
         $key = 'test';
         $new_key = 'new key';
@@ -80,7 +79,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$new_key]);
         self::assertEquals('LIKE', $test2[0]);
-        self::assertEquals($test2[1], TestData::TEST_DATA3[$key] . '%');
+        self::assertEquals($test2[1], TestData::TEST_DATA3[$key].'%');
 
         //Test 2. right fuzzy search
         $key = 'C';
@@ -92,7 +91,7 @@ class QueryTest extends TestCase
 
         self::assertIsArray($test2 = $property->getValue($object)[$new_key]);
         self::assertEquals('LIKE', $test2[0]);
-        self::assertEquals($test2[1], '%' . TestData::TEST_DATA3[$key] . '%');
+        self::assertEquals($test2[1], '%'.TestData::TEST_DATA3[$key].'%');
     }
 
     /**
@@ -129,8 +128,8 @@ class QueryTest extends TestCase
         $params['front_param2'] = [3, 6, 7];
 
         $result = $this->param($params)
-            ->inKey(['front_param1', 'user'], [new MultiInKey, 'a'])
-            ->inKey(['front_param2', 'user'], [new MultiInKey, 'b'])
+            ->inKey(['front_param1', 'user'], [new MultiInKey(), 'a'])
+            ->inKey(['front_param2', 'user'], [new MultiInKey(), 'b'])
             ->result();
         self::assertIsArray($result);
         self::assertArrayHasKey('user', $result);
