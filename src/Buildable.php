@@ -9,7 +9,7 @@ trait Buildable
     use Sortable;
 
     /**
-     * assign the value.
+     * Assign the value.
      *
      * @param array|string $key   can be array or string
      * @param int          $fuzzy fuzzy search
@@ -113,7 +113,7 @@ trait Buildable
     }
 
     /**
-     * before one key.
+     * Before one key.
      *
      * @param array|string $key name of key
      *
@@ -137,7 +137,7 @@ trait Buildable
     }
 
     /**
-     * after one key.
+     * After one key.
      *
      * @param array|string $key name of key
      *
@@ -161,7 +161,7 @@ trait Buildable
     }
 
     /**
-     * unset some keys.
+     * Unset some keys.
      *
      * @param mixed ...$key name of key
      *
