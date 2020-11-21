@@ -122,9 +122,8 @@ class QueryTest extends TestCase
         self::assertIsArray($result);
         self::assertEquals($result[$key][1], array_unique(explode(',', TestData::TEST_DATA6[$key])));
 
-        unset($params);
-
         //Test 4. Multi In
+        unset($params);
         $params['front_param1'] = [1, 2, 3];
         $params['front_param2'] = [3, 6, 7];
 
