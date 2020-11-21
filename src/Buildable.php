@@ -41,7 +41,7 @@ trait Buildable
     }
 
     /**
-     * in some keys.
+     * In some keys.
      *
      * @param array|string $key name of key
      *
@@ -51,9 +51,11 @@ trait Buildable
      * <pre>
      * $this->inKey('x');
      * $this->inKey(['x', 'y']);   //rename x as y
+     * $this->inKey(['x'], [TemplateClass::class, 'func'])
+     * $this->inKey(['x', 'y'], [TemplateClass::class, 'func'])
      * </pre>
      */
-    public function inKey($key)
+    public function inKey($key, $operate = null)
     {
         $result = $this->renameKey($key);
 
@@ -61,7 +63,21 @@ trait Buildable
             if (is_string($key = $this->params[$result['key']])) {
                 $key = explode(',', $key);
             }
-            $this->init[$result['name']] = ['IN', array_unique($key)];
+
+            if ($operate == null) {
+                $this->init[$result['name']] = ['IN', array_unique($key)];
+            } else {
+                $expected = call_user_func_array($operate, [$key]);
+
+                //If $result['name'] exist, intersect
+                $this->init[$result['name']] =
+                    array_key_exists($result['name'], $this->init) ?
+                    ['IN', array_intersect(
+                        $expected,
+                        $this->init[$result['name']][1]
+                    )] :
+                    ['IN', $expected];
+            }
         }
 
         return $this;
@@ -82,7 +98,8 @@ trait Buildable
      */
     public function betweenKey(string $key, array $value)
     {
-        if (array_key_exists('start', $value) && array_key_exists('end', $value)
+        if (
+            array_key_exists('start', $value) && array_key_exists('end', $value)
             && param_exist($this->params, $value['end']) && param_exist($this->params, $value['start'])
         ) {
             $this->init[$key] = ['BETWEEN', [$this->params[$value['start']], $this->params[$value['end']]]];
