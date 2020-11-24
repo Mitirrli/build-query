@@ -44,11 +44,6 @@ $this->param($params ?? [])
 ```php
 use Mitirrli\Buildable\Buildable;
 
-$this->param($params ?? [])
-    ->initial(['time' => 'desc'])
-    ->sort('time')
-    ->order();
-
 $order = $this
    ->param(array_merge(['update_time' => 'desc'], $params)) //默认更新时间排序
    ->sort(['update_time', 'a.update_time']) //更新时间
