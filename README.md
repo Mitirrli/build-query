@@ -48,4 +48,11 @@ $this->param($params ?? [])
     ->initial(['time' => 'desc'])
     ->sort('time')
     ->order();
+
+$order = $this
+   ->param(array_merge(['update_time' => 'desc'], $params)) //默认更新时间排序
+   ->sort(['update_time', 'a.update_time']) //更新时间
+   ->sort(['id', 'a.id']) //ID
+   ->sort('create_time') //阅读量
+   ->order();
 ```
