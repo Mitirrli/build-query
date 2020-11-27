@@ -21,19 +21,14 @@ trait SearchTrait
      */
     public function getFuzzyParam(string $key, int $fuzzy): string
     {
-        switch ($fuzzy) {
-            case Constant::RIGHT:
-                return $key.'%';
-
-            case Constant::LEFT:
-                return '%'.$key;
-
-            case Constant::ALL:
-                return '%'.$key.'%';
-
-            default:
-                throw new NotExistException('This value is not exist.', 1);
-        }
+        return match($fuzzy) {
+            Constant::RIGHT => $key.'%',
+            Constant::LEFT  => '%'.$key,
+            Constant::ALL => '%'.$key.'%',
+            default => throw new NotExistException(
+                'This value is not exist.', 1
+            )
+        };
     }
 
     /**
