@@ -14,15 +14,15 @@ abstract class TestData
     ];
 
     public const TEST_DATA2 = [
-        'name' => 'hello',
+        'name'     => 'hello',
         'language' => 'php',
-        'test' => 'phpUnit',
+        'test'     => 'phpUnit',
     ];
 
     public const TEST_DATA3 = [
-        'JS' => 'HTML',
+        'JS'  => 'HTML',
         'PHP' => 'MYSQL',
-        'C' => 'DLL',
+        'C'   => 'DLL',
     ];
 
     public const TEST_DATA4 = [
@@ -31,7 +31,7 @@ abstract class TestData
 
     public const TEST_DATA5 = [
         'start' => 0,
-        'end' => 22,
+        'end'   => 22,
     ];
 
     public const TEST_DATA6 = [
