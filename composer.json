@@ -15,13 +15,13 @@
         }
     ],
     "require": {
-        "php": "^7.4",
-        "brainmaestro/composer-git-hooks": "^2.8"
+        "php": "^7.4"
     },
     "require-dev": {
         "php-coveralls/php-coveralls": "^2.3",
         "phpunit/phpunit": "~7",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "brainmaestro/composer-git-hooks": "^2.8"
     },
     "autoload": {
         "psr-4": {
