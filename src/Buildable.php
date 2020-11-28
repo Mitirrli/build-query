@@ -65,7 +65,7 @@ trait Buildable
                 $key = explode(',', $key);
             }
 
-            if ($operate == null) {
+            if ($operate === null) {
                 $this->init[$result['name']] = ['IN', array_unique($key)];
             } else {
                 $expected = call_user_func_array($operate, [$key]);
