@@ -19,8 +19,6 @@ trait BaseTrait
     /**
      * get user params.
      *
-     * @param array $params
-     *
      * @return $this
      *
      * @example
@@ -56,8 +54,6 @@ trait BaseTrait
 
     /**
      * get result.
-     *
-     * @return array
      */
     public function result(): array
     {
@@ -67,11 +63,7 @@ trait BaseTrait
     /**
      * get order result.
      *
-     * @param string $name
-     *
      * @throws NotExistException
-     *
-     * @return string
      *
      * @example
      * <pre>
@@ -80,7 +72,7 @@ trait BaseTrait
      */
     public function order(string $name = 'sort'): string
     {
-        if (!array_key_exists($name, $this->init)) {
+        if (! array_key_exists($name, $this->init)) {
             throw new NotExistException('This key is not exist.', 2);
         }
 

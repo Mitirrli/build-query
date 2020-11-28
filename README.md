@@ -1,7 +1,6 @@
 <h1 align="center"> build query </h1>
 <p align="center">:rainbow: use for build query.</p>
 
-![StyleCI build status](https://github.styleci.io/repos/300122166/shield)
 [![Build Status](https://travis-ci.org/Mitirrli/build-query.svg?branch=master)](https://travis-ci.org/Mitirrli/build-query)
 [![Coverage Status](https://coveralls.io/repos/github/Mitirrli/build-query/badge.svg?branch=master)](https://coveralls.io/github/Mitirrli/build-query?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0a4fbf4b819b4817a42976e452cef04b)](https://app.codacy.com/gh/Mitirrli/build-query?utm_source=github.com&utm_medium=referral&utm_content=Mitirrli/build-query&utm_campaign=Badge_Grade)

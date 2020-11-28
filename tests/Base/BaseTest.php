@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mitirrli\Buildable\Tests\Base;
 
 use Mitirrli\Buildable\Buildable;
 use Mitirrli\Buildable\Tests\Constant\TestData;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class BaseTest extends TestCase
 {
     use Buildable;

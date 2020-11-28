@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mitirrli\Buildable\Tests\Base;
 
 use Mitirrli\Buildable\Buildable;
 use Mitirrli\Buildable\Constant;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class FunctionTest extends TestCase
 {
     use Buildable;
@@ -17,8 +23,8 @@ class FunctionTest extends TestCase
     {
         $key = 'a';
 
-        self::assertEquals($this->getFuzzyParam($key, Constant::ALL), '%'.$key.'%');
-        self::assertEquals($this->getFuzzyParam($key, Constant::LEFT), '%'.$key);
-        self::assertEquals($this->getFuzzyParam($key, Constant::RIGHT), $key.'%');
+        self::assertEquals($this->getFuzzyParam($key, Constant::ALL), '%' . $key . '%');
+        self::assertEquals($this->getFuzzyParam($key, Constant::LEFT), '%' . $key);
+        self::assertEquals($this->getFuzzyParam($key, Constant::RIGHT), $key . '%');
     }
 }
