@@ -22,7 +22,6 @@ class QueryTest extends TestCase
      */
     public function testKey()
     {
-        self::assertEquals(1, 2);
         //Test 1. accurate search
         $key = 'name';
         $object = $this->param(TestData::TEST_DATA2)->key($key);
