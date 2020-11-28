@@ -10,7 +10,7 @@
 
 ## Environment
 
-- PHP >= 8.0
+- PHP >= 7.1
 
 ## Installation
 
