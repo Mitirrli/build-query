@@ -18,11 +18,11 @@ trait SearchTrait
     {
         switch ($fuzzy) {
             case Constant::RIGHT:
-                return $key . '%';
+                return $key.'%';
             case Constant::LEFT:
-                return '%' . $key;
+                return '%'.$key;
             case Constant::ALL:
-                return '%' . $key . '%';
+                return '%'.$key.'%';
             default:
                 throw new NotExistException('This value is not exist.', 1);
         }

@@ -23,8 +23,8 @@ class FunctionTest extends TestCase
     {
         $key = 'a';
 
-        self::assertEquals($this->getFuzzyParam($key, Constant::ALL), '%' . $key . '%');
-        self::assertEquals($this->getFuzzyParam($key, Constant::LEFT), '%' . $key);
-        self::assertEquals($this->getFuzzyParam($key, Constant::RIGHT), $key . '%');
+        self::assertEquals($this->getFuzzyParam($key, Constant::ALL), '%'.$key.'%');
+        self::assertEquals($this->getFuzzyParam($key, Constant::LEFT), '%'.$key);
+        self::assertEquals($this->getFuzzyParam($key, Constant::RIGHT), $key.'%');
     }
 }

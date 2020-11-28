@@ -13,6 +13,6 @@ abstract class TestSort
     public const TEST_SORT2 = [
         'create_time' => 'desc',
         'update_time' => 'asc',
-        'sort' => 'asc',
+        'sort'        => 'asc',
     ];
 }
