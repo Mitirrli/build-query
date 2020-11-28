@@ -72,7 +72,7 @@ trait BaseTrait
      */
     public function order(string $name = 'sort'): string
     {
-        if (!array_key_exists($name, $this->init)) {
+        if (! array_key_exists($name, $this->init)) {
             throw new NotExistException('This key is not exist.', 2);
         }
 
