@@ -39,6 +39,38 @@ trait Buildable
 
         return $this;
     }
+    
+    /**
+     * Not the value.
+     *
+     * @param array|string $key   can be array or string
+     * @param int          $fuzzy fuzzy search
+     *
+     * @throws Exception\NotExistException
+     *
+     * @return $this
+     *
+     * @example
+     * <pre>
+     * $this->noKey('x');
+     * $this->noKey(['x', 'y']);            //rename x as y
+     * $this->noKey('x', Constant::RIGHT);  //right fuzzy search
+     * $this->noKey('x', Constant::ALL);    //all fuzzy search
+     * </pre>
+     */
+    public function noKey($key, int $fuzzy = Constant::NONE)
+    {
+        $result = $this->renameKey($key);
+
+        if (param_exist($this->params, $result['key'])) {
+            $this->init[$result['name']]
+                = $fuzzy ?
+                ['NEQ', $this->getFuzzyParam($this->params[$result['key']], $fuzzy)]
+                : ['NEQ', $this->params[$result['key']]];
+        }
+
+        return $this;
+    }
 
     /**
      * In some keys.
@@ -126,12 +158,12 @@ trait Buildable
      * $this->beforeKey(['x', 'y']);   //rename x as y
      * </pre>
      */
-    public function beforeKey($key)
+    public function beforeKey($key, bool $equal = false)
     {
         $result = $this->renameKey($key);
 
         if (param_exist($this->params, $key = $result['key'])) {
-            $this->init[$result['name']] = ['<', $this->params[$key]];
+            $this->init[$result['name']] = [$equal ? '<=' : '<', $this->params[$key]];
         }
 
         return $this;
@@ -150,12 +182,12 @@ trait Buildable
      * $this->afterKey(['x', 'y']);   //rename x as y
      * </pre>
      */
-    public function afterKey($key)
+    public function afterKey($key, bool $equal = false)
     {
         $result = $this->renameKey($key);
 
         if (param_exist($this->params, $key = $result['key'])) {
-            $this->init[$result['name']] = ['>', $this->params[$key]];
+            $this->init[$result['name']] = [$equal ? '>=' : '>', $this->params[$key]];
         }
 
         return $this;
