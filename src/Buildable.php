@@ -127,19 +127,28 @@ trait Buildable
      * @example
      * <pre>
      * $this->betweenKey('created_at', ['start' => 'create', 'end' => 'end']);
+     * $this->betweenKey('created_at');
      * </pre>
      */
     public function betweenKey(string $key, array $value)
     {
-        if (
-            array_key_exists('start', $value) && array_key_exists('end', $value)
-            && param_exist($this->params, $value['end']) && param_exist($this->params, $value['start'])
-        ) {
-            $this->init[$key] = ['BETWEEN', [$this->params[$value['start']], $this->params[$value['end']]]];
-        } elseif (array_key_exists('start', $value) && param_exist($this->params, $value['start'])) {
-            $this->init[$key] = ['>=', $this->params[$value['start']]];
-        } elseif (array_key_exists('end', $value) && param_exist($this->params, $value['end'])) {
-            $this->init[$key] = ['<=', $this->params[$value['end']]];
+        if (is_array($value)) {
+            if (
+                array_key_exists('start', $value) && array_key_exists('end', $value)
+                && param_exist($this->params, $value['end']) && param_exist($this->params, $value['start'])
+            ) {
+                $this->init[$key] = ['BETWEEN', [$this->params[$value['start']], $this->params[$value['end']]]];
+            } elseif (array_key_exists('start', $value) && param_exist($this->params, $value['start'])) {
+                $this->init[$key] = ['>=', $this->params[$value['start']]];
+            } elseif (array_key_exists('end', $value) && param_exist($this->params, $value['end'])) {
+                $this->init[$key] = ['<=', $this->params[$value['end']]];
+            }
+        } else {
+            if (param_exist($this->params, $value ?? $key)) {
+                $temp = explode(',', $this->params[$value ?? $key]) ?? '';
+
+                $this->init[$key] = ['BETWEEN', [$temp[0], $temp[1]]];
+            }
         }
 
         return $this;
